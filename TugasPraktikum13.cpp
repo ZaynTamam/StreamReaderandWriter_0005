@@ -74,3 +74,23 @@ public:
         }
         return daftarBarang;
     }
+
+    void updateBarang(int indeksBaris, const string& namaBaru) {
+        vector<string> daftar = muatSemuaBarang();
+        
+        if (indeksBaris < 1 || indeksBaris > daftar.size()) {
+            cout << ">> Error: Nomor barang tidak valid!\n";
+            return;
+        }
+
+        daftar[indeksBaris - 1] = namaBaru;
+
+        ofstream file(namaFile, ios::trunc); 
+        if (file.is_open()) {
+            for (const string& barang : daftar) {
+                file << barang << "\n";
+            }
+            file.close();
+            cout << ">> Sukses: Data barang berhasil diperbarui!\n";
+        }
+    }
