@@ -115,3 +115,86 @@ public:
         }
     }
 };
+
+int main() {
+    TokoElektronik toko;
+    int pilihan;
+
+    do {
+        toko.tampilkanGudang();
+
+        cout << "\n===  Toko Gibran Jaya ===\n";
+        cout << "1. Tambah Barang ke Gudang\n";
+        cout << "2. Update Barang di Gudang\n";
+        cout << "3. Hapus Barang dari Gudang\n";
+        cout << "4. Simulasi Etalase\n";
+        cout << "0. Keluar\n";
+        cout << "Pilih menu: ";
+        
+        if (!(cin >> pilihan)) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            pilihan = -1;
+        }
+        cin.ignore(); 
+
+        switch (pilihan) {
+            case 1: {
+                string nama;
+                cout << "\nMasukkan nama barang baru: ";
+                getline(cin, nama);
+                toko.tambahBarang(nama);
+                break;
+            }
+            case 2: {
+                int id;
+                string namaBaru;
+                cout << "\nMasukkan nomor barang yang ingin diubah: ";
+                cin >> id;
+                cin.ignore();
+                cout << "Masukkan nama barang yang baru: ";
+                getline(cin, namaBaru);
+                toko.updateBarang(id, namaBaru);
+                break;
+            }
+            case 3: {
+                int id;
+                cout << "\nMasukkan nomor barang yang ingin dihapus: ";
+                cin >> id;
+                cin.ignore();
+                toko.hapusBarang(id);
+                break;
+            }
+            case 4: {
+                cout << "\n=== Menjalankan Simulasi Etalase ===\n";
+                
+                cout << "Mencoba mengambil barang di rak indeks ke-1...\n";
+                try {
+                    string barangSukses = toko.ambilProduk(1);
+                    cout << ">> Berhasil! Barang yang didapat: " << barangSukses << "\n";
+                } catch (const exception& e) {
+                    cout << ">> Error: " << e.what() << "\n";
+                }
+
+                cout << "\nMencoba mengambil barang di rak indeks ke-5...\n";
+                try {
+                    string barangGagal = toko.ambilProduk(5);
+                    cout << ">> Berhasil! Barang yang didapat: " << barangGagal << "\n";
+                } catch (const exception& e) {
+                    cout << ">> Error Tertangkap: " << e.what() << "\n";
+                }
+                
+                cout << "================================================\n";
+                break;
+            }
+            case 0:
+                cout << "\nTerima kasih telah menggunakan sistem Gibran Jaya!\n";
+                break;
+            default:
+                cout << "\n>> Error: Pilihan tidak valid, silakan coba lagi.\n";
+                break;
+        }
+    } while (pilihan != 0);
+
+    return 0;
+}
