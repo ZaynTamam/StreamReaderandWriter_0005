@@ -27,3 +27,26 @@ public:
             throw runtime_error(pesanError);
         }
     }
+
+    void tampilkanGudang() {
+        ifstream file(namaFile);
+        cout << "\n=== Daftar Barang di Gudang (DB_GibranJaya.txt) ===\n";
+        
+        if (!file.is_open()) {
+            cout << "[ Gudang masih kosong / file belum dibuat ]\n";
+            return;
+        }
+
+        string baris;
+        int nomor = 1;
+        bool adaIsi = false;
+        
+        while (getline(file, baris)) {
+            cout << nomor << ". " << baris << "\n";
+            nomor++;
+            adaIsi = true;
+        }
+        
+        if (!adaIsi) cout << "[ Gudang kosong ]\n";
+        file.close();
+    }
