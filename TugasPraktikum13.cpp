@@ -50,3 +50,14 @@ public:
         if (!adaIsi) cout << "[ Gudang kosong ]\n";
         file.close();
     }
+
+    void tambahBarang(const string& namaBarang) {
+        ofstream file(namaFile, ios::app); 
+        if (file.is_open()) {
+            file << namaBarang << "\n";
+            file.close();
+            cout << ">> Sukses: Barang '" << namaBarang << "' ditambahkan ke gudang!\n";
+        } else {
+            cout << ">> Error: Gagal membuka file gudang.\n";
+        }
+    }
