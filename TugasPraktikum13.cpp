@@ -195,6 +195,5 @@ int main() {
                 break;
         }
     } while (pilihan != 0);
-
-    return 0;
-}
+return 0;
+}  
