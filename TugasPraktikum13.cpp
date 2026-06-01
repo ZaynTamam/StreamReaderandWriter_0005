@@ -61,3 +61,16 @@ public:
             cout << ">> Error: Gagal membuka file gudang.\n";
         }
     }
+
+    vector<string> muatSemuaBarang() {
+        vector<string> daftarBarang;
+        ifstream file(namaFile);
+        string baris;
+        if (file.is_open()) {
+            while (getline(file, baris)) {
+                daftarBarang.push_back(baris);
+            }
+            file.close();
+        }
+        return daftarBarang;
+    }
